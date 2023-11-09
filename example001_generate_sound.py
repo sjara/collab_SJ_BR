@@ -8,7 +8,7 @@ from importlib import reload
 reload(soundgen)
 
 
-sound = soundgen.Sound(duration=0.1, srate=44100)  # Create sound object
+sound = soundgen.Sound(duration=0.5, srate=44100)  # Create sound object
 
 sound.add_tone(freq=500, amp=0.1)
 sound.add_noise(amp=0.02)
