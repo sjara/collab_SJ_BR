@@ -135,7 +135,7 @@ class Sound():
             return
         wave16bit = (32767*self.wave).astype('int16')
         wavefileFull = os.path.join(outdir, wavefile)
-        scipy.io.wavfile.write(wavefile, self.srate, wave16bit)
+        scipy.io.wavfile.write(wavefileFull, self.srate, wave16bit)
         if infofile is None:
             infofile = wavefile.replace('.wav','.txt')
         infofileFull = os.path.join(outdir, infofile)
