@@ -72,13 +72,19 @@ class Sound():
 
         Returns:
             tuple: Time vector and the updated sound waveform.
+
+        Notes:
+        - Waveform amplitude is amp/sqrt(ntones) to match the RMS power of one tone at the same amp.
+        - A chord with ntones=1 will create a tone at midfreq/factor, not at midfreq.
+
         """
         freqEachComp = np.logspace(np.log10(midfreq/factor),
                                    np.log10(midfreq*factor),
                                    ntones)
         phase = randomGen.uniform(-np.pi, np.pi, ntones)
+        chordAmp = amp/np.sqrt(ntones)
         for indcomp, freqThisComp in enumerate(freqEachComp):
-            self.wave += amp*np.sin(2*np.pi * freqThisComp * self.tvec + phase[indcomp])
+            self.wave += chordAmp*np.sin(2*np.pi * freqThisComp * self.tvec + phase[indcomp])
         self.components += [{'type':'chord', 'midfreq':midfreq, 'factor':factor,
                              'ntones':ntones, 'amp':amp}]
         return self.tvec, self.wave
