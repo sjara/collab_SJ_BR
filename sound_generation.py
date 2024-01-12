@@ -139,6 +139,8 @@ class Sound():
         if wavefile[-4:] != '.wav':
             print('Nothing saved. Your filename needs to end the extension ".wav"')
             return
+        if np.any(self.wave>1) or np.any(self.wave<-1):
+            print('WARNING! Your waveform extends beyond the (-1, 1) amplitude range, so it will contain spurious noise created by saturation.\n         Try reducing the amplitude when generating the sound.')
         wave16bit = (32767*self.wave).astype('int16')
         wavefileFull = os.path.join(outdir, wavefile)
         scipy.io.wavfile.write(wavefileFull, self.srate, wave16bit)
